@@ -1,0 +1,8 @@
+{
+  - follow
+    host
+  - proxy
+  - timeout
+  + timeout
+  + verbose
+}
