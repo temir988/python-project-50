@@ -1,10 +1,8 @@
 # -*- coding:utf-8 -*-
-"""Generate_diff tests."""
 from gendiff.cli import show_diff, generate_diff
 
 
 def test_show_diff():
-    """Check that show_diff has correct work."""
     stub_diff = {
         'a': 'added',
         'b': 'deleted',

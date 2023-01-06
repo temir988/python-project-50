@@ -1,4 +1,4 @@
-from ..cli import init
+from gendiff.cli import init
 
 
 def main():

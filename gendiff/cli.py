@@ -3,7 +3,8 @@ import json
 
 
 def init():
-    parser = argparse.ArgumentParser(description='Compares two configuration files and shows a difference.')
+    desc = 'Compares two configuration files and shows a difference.'
+    parser = argparse.ArgumentParser(description=desc)
     parser.add_argument('first_file')
     parser.add_argument('second_file')
     parser.add_argument('-f', '--format')
@@ -11,9 +12,11 @@ def init():
     return generate_diff(args.first_file, args.second_file)
 
 
-def generate_diff(filepath1, filepath2):
-    file1 = json.load(open(filepath1))
-    file2 = json.load(open(filepath2))
+def generate_diff(filepath1, filepath2) -> str:
+    with open(filepath1) as f1:
+        file1 = json.load(f1)
+    with open(filepath2) as f2:
+        file2 = json.load(f2)
 
     keys = set(file1.keys()).union(set(file2.keys()))
 
@@ -35,19 +38,19 @@ def generate_diff(filepath1, filepath2):
     return show_diff(diff)
 
 
-def show_diff(diff):
-    result = '{\n'
+def show_diff(diff) -> str:
+    formatted_diff = '{\n'
 
     for key in sorted(diff.keys()):
         if diff[key] == 'unmodified':
-            result += f'    {key}\n'
+            formatted_diff += '    {k}\n'.format(k=key)
         elif diff[key] == 'added':
-            result += f'  + {key}\n'
+            formatted_diff += '  + {k}\n'.format(k=key)
         elif diff[key] == 'deleted':
-            result += f'  - {key}\n'
+            formatted_diff += '  - {k}\n'.format(k=key)
         elif diff[key] == 'modified':
-            result += f'  - {key}\n'
-            result += f'  + {key}\n'
+            formatted_diff += '  - {k}\n'.format(k=key)
+            formatted_diff += '  + {k}\n'.format(k=key)
 
-    result += '}'
-    return result
+    formatted_diff += '}'
+    return formatted_diff
