@@ -1,5 +1,7 @@
 import argparse
-import json
+import os
+
+from gendiff.parsers import get_parser
 
 
 def init():
@@ -9,14 +11,18 @@ def init():
     parser.add_argument('second_file')
     parser.add_argument('-f', '--format')
     args = parser.parse_args()
-    return generate_diff(args.first_file, args.second_file)
+    _, ext = os.path.splitext(args.first_file)
+
+    return generate_diff(args.first_file, args.second_file, ext[1:])
 
 
-def generate_diff(filepath1, filepath2) -> str:
+def generate_diff(filepath1, filepath2, ext) -> str:
+    parse = get_parser(ext)
+
     with open(filepath1) as f1:
-        file1 = json.load(f1)
+        file1 = parse(f1)
     with open(filepath2) as f2:
-        file2 = json.load(f2)
+        file2 = parse(f2)
 
     keys = set(file1.keys()).union(set(file2.keys()))
 

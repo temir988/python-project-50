@@ -10,3 +10,6 @@
 
 ### Basic example:
 [![asciicast](https://asciinema.org/a/FMHmLRpZqh4XuAil2MPTFXZAp.svg)](https://asciinema.org/a/FMHmLRpZqh4XuAil2MPTFXZAp)
+
+### Yaml example:
+[![asciicast](https://asciinema.org/a/pzpeHxJ8H8WTpVsd4nacbhOMT.svg)](https://asciinema.org/a/pzpeHxJ8H8WTpVsd4nacbhOMT)

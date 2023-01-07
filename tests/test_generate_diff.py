@@ -18,7 +18,17 @@ def test_show_diff():
 def test_generate_diff():
     fp1 = 'tests/fixtures/file1.json'
     fp2 = 'tests/fixtures/file2.json'
-    diff = generate_diff(fp1, fp2)
+    diff = generate_diff(fp1, fp2, 'json')
+
+    with open('tests/fixtures/diff_result.txt') as file:
+        result = ''.join(file.readlines())
+        assert diff == result
+
+
+def test_yaml_format():
+    fp1 = 'tests/fixtures/file1.yaml'
+    fp2 = 'tests/fixtures/file2.yaml'
+    diff = generate_diff(fp1, fp2, 'yaml')
 
     with open('tests/fixtures/diff_result.txt') as file:
         result = ''.join(file.readlines())
